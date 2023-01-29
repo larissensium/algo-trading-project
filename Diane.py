@@ -85,10 +85,10 @@ def list_completer(time_array,time_bid,price_bid):
         for j in range(len (time_bid)-1):
             if time_array[i] == time_bid[j] or time_array[i] > time_bid[j]:
                 offer_array.append(price_bid[i])
-                print("j",j)
+                #print("j",j)
             else:
                 if(i>=999):break
-                print("i",i)
+                #print("i",i)
                 offer_array.append(price_bid[i+1])
                 i+=1
         if(j==998):i+=1
@@ -126,8 +126,19 @@ plt.legend()
 plt.show()
 
 
-# In[ ]:
+# In[134 ]:
 
+# Gap between offer and price 
 
+gap_array = [ask - offer for (ask, offer) in zip (ask_arrays[0:999],offers_array[0:999])]
 
+#Graph 
+plt.plot(time_array[0:999],gap_array, label='difference through time')
+plt.title('Graph of the difference between offers and asks')
+plt.legend()
+plt.show()
 
+#Histogram
+plt.hist(gap_array)
+plt.title('histogram of the spread')
+plt.show()
