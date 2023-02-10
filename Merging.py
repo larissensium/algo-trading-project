@@ -8,6 +8,7 @@ Created on Fri Feb 10 11:13:10 2023
 
 import pandas as pd
 from operator import itemgetter
+import csv
 #import matplotlib.pyplot as plt
 
 # In[78]:
@@ -85,3 +86,17 @@ def merging (time_ask_array,time_bid_array):
 # In[111]:
     
 Final = merging (time_ask_array,time_bid_array)
+
+# In[112]:
+# CSV file importation 
+
+# field name 
+fields = ['Time', 'Ask_Bid', 'Row']
+
+with open('MergedTime', 'w') as f:
+      
+    # using csv.writer method from CSV package
+    write = csv.writer(f)
+      
+    write.writerow(fields)
+    write.writerows(Final)
