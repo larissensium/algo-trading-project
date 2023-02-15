@@ -5,7 +5,6 @@
 
 #@author: madidina
 
-
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -20,24 +19,34 @@ csv_offer_file = pd.read_csv(offer_file)
 csv_bid_file = pd.read_csv(bid_file)
 
 # Init Arrays
-time_array = csv_merge_file.iloc[:, 0].tolist()
-bid_array = ['Nan']
-offer_array = ['Nan']
+time_list = csv_merge_file.iloc[:, 0].tolist()
+bid_list = ['Nan']
+offer_list = ['Nan']
+spread_list = []
 
 # Import data 
 
 for index,row in csv_merge_file.iterrows():
-    #time_array.append(row)
+    #time_list.append(row)
     if (row[1]=='b'):
         # Acces specific row and coloumn in a csv file
-        bid_array.append(csv_bid_file.loc[row[2],:][1])
-        offer_array.append(offer_array[-1])
+        bid_list.append(csv_bid_file.loc[row[2],:][1])
+        offer_list.append(offer_list[-1])
+        spread_list.append(bid_list[-1] - offer_list[-1])
         
     else:
-        bid_array.append(bid_array[-1])
-        offer_array.append(csv_offer_file.loc[row[2],:][1])
-        
-plt.plot(time_array,offer_array, title='Offer')
-plt.plot(time_array,bid_array, title='Bid')
+        bid_list.append(bid_list[-1])
+        offer_list.append(csv_offer_file.loc[row[2],:][1])
+        spread_list.append(bid_list[-1] - offer_list[-1])
+
+#spread = [(o - b) for o, b in zip(offer_list, bid_list)]
+#spread = np.array(offer_list)-np.array(bid_list)
+
+plt.plot(time_list[:-3],offer_list, label='Offer')
+plt.plot(time_list[:-3],bid_list, label='Bid')
+plt.legend()
+plt.show()
+
+plt.plot(time_list[:-3],spread_list, label='Spread')
 plt.legend()
 plt.show()
