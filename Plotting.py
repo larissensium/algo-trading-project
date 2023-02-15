@@ -7,6 +7,7 @@
 
 
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # Open
 merge_file = open('./MergedTime')
@@ -19,14 +20,12 @@ csv_offer_file = pd.read_csv(offer_file)
 csv_bid_file = pd.read_csv(bid_file)
 
 # Init Arrays
-time_array = ['Nan']
+time_array = csv_merge_file.iloc[:, 0].tolist()
 bid_array = ['Nan']
 offer_array = ['Nan']
 
 # Import data 
-offer_index, bid_index = 0, 0
 
-#start after the hearder
 for index,row in csv_merge_file.iterrows():
     #time_array.append(row)
     if (row[1]=='b'):
@@ -38,7 +37,7 @@ for index,row in csv_merge_file.iterrows():
         bid_array.append(bid_array[-1])
         offer_array.append(csv_offer_file.loc[row[2],:][1])
         
-            
-        
-
-# Ask price 
+plt.plot(time_array,offer_array, title='Offer')
+plt.plot(time_array,bid_array, title='Bid')
+plt.legend()
+plt.show()
