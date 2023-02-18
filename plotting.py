@@ -35,7 +35,7 @@ for index,row in csv_merge_file.iterrows():
     #time_list.append(row)
     if (row[1]=='b'):
         # Acces specific row and coloumn in a csv file
-        bid_list.append(csv_bid_file.loc[row[2],:][1])
+        bid_list.append(csv_bid_file.loc[row[2],:][1]) # initially this line gave me a Key Error "382323" (which is also length of time_list
         offer_list.append(offer_list[-1])
         spread_list.append(offer_list[-1] - bid_list[-1])
         
