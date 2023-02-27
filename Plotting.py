@@ -7,9 +7,6 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
-import time
-
-t0 = time.clock()
 
 # Open
 merge_file = open('./MergedTime')
@@ -29,29 +26,30 @@ spread_list = []
 
 # Import data 
 for index,row in csv_merge_file.iterrows():
-    #time_list.append(row)
+    
+    selected_row = row[2]
+    
+    if (selected_row == len(csv_bid_file)) or (selected_row == len(csv_offer_file)):
+        selected_row-=1
+    
     if (row[1]=='b'):
         # Acces specific row and coloumn in a csv file
-        bid_list.append(csv_bid_file.loc[row[2],:][1])
+        bid_list.append(csv_bid_file.loc[selected_row,:][1])
         offer_list.append(offer_list[-1])
         spread_list.append(bid_list[-1] - offer_list[-1])
         
     else:
         bid_list.append(bid_list[-1])
-        offer_list.append(csv_offer_file.loc[row[2],:][1])
+        offer_list.append(csv_offer_file.loc[selected_row,:][1])
         spread_list.append(bid_list[-1] - offer_list[-1])
 
-print ('lists creat')
-#spread = [(o - b) for o, b in zip(offer_list, bid_list)]
-#spread = np.array(offer_list)-np.array(bid_list)
+print ('lists created')
 
-plt.plot(time_list[:-3],offer_list, label='Offer')
-plt.plot(time_list[:-3],bid_list, label='Bid')
+plt.plot(time_list,offer_list[:-1], label='Offer')
+plt.plot(time_list,bid_list[:-1], label='Bid')
 plt.legend()
 plt.show()
 
-plt.plot(time_list[:-3],spread_list, label='Spread')
+plt.plot(time_list,spread_list, label='Spread')
 plt.legend()
 plt.show()
-
-print(t0)
