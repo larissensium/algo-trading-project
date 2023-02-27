@@ -36,20 +36,20 @@ for index,row in csv_merge_file.iterrows():
         # Acces specific row and coloumn in a csv file
         bid_list.append(csv_bid_file.loc[selected_row,:][1])
         offer_list.append(offer_list[-1])
-        spread_list.append(bid_list[-1] - offer_list[-1])
+        spread_list.append(offer_list[-1] - bid_list[-1])
         
     else:
         bid_list.append(bid_list[-1])
         offer_list.append(csv_offer_file.loc[selected_row,:][1])
-        spread_list.append(bid_list[-1] - offer_list[-1])
+        spread_list.append(offer_list[-1] - bid_list[-1])
 
 print ('lists created')
 
-plt.plot(time_list,offer_list[:-1], label='Offer')
-plt.plot(time_list,bid_list[:-1], label='Bid')
+plt.plot(time_list[10:],offer_list[10:-1], label='Offer')
+plt.plot(time_list[10:],bid_list[10:-1], label='Bid')
 plt.legend()
 plt.show()
 
-plt.plot(time_list,spread_list, label='Spread')
+plt.plot(time_list[10:],spread_list[10:], label='Spread')
 plt.legend()
 plt.show()
