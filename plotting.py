@@ -64,7 +64,8 @@ plt.plot(time_list[1:],spread_list[1:], label='Spread')
 plt.legend()
 plt.show()
 
-plt.hist(spread_list[1:])
+## histogram of the spread
+plt.hist(spread_list[1:],bins=np.linspace(-1, 10, num=100))
 plt.show()
 
 # Info : 4 minutes of running time
