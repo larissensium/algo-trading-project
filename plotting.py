@@ -95,4 +95,12 @@ print('counts of spread = 0.5:', spread_05 ,'\npercentage of all spread values: 
 spread_1_5 = spread_list.count(1.5)
 percent_1_5 = spread_1_5/len(spread_list) # 0.18114534076189584
 print('counts of spread = 1.5:', spread_1_5 ,'\npercentage of all spread values: ',percent_1_5,'\n')
+
+
+# removing all values less or equal to 0
+res = [n for n in spread_list if n > 0]
+
+# displaying all remaining values of the spread to check
+Counter(res)
+
 # Info : 4 minutes of running time
