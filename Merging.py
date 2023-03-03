@@ -9,43 +9,26 @@ Created on Fri Feb 10 11:13:10 2023
 import pandas as pd
 from operator import itemgetter
 import csv
-#import matplotlib.pyplot as plt
 
 # In[78]:
 
     
 # bid file
 df_bid = pd.read_csv('./bid_Price_File_3251758.csv', header=None)
-df_bid = df_bid.drop(df_bid.index[1000:])
 
 # Bid file separate into series of price and time
 price_bid = df_bid.iloc[:, 1] 
 time_bid = df_bid.iloc[:, 0]
-#price_bid
-
-
-# In[80]:
-
-
-#time_bid
-
 
 # In[81]:
 
 
 # Offer file
-df_ask = pd.read_csv('./offer_Price_File_3251758.csv', header=None)
-df_ask = df_ask.drop(df_ask.index[1000:])
+df_offer = pd.read_csv('./offer_Price_File_3251758.csv', header=None)
 
 # Offer file separate into series of price and time
-price_ask = df_ask.iloc[:, 1]
-time_ask = df_ask.iloc[:, 0]
-
-
-# In[82]:
-
-
-#time_ask
+price_offer = df_offer.iloc[:, 1]
+time_offer = df_offer.iloc[:, 0]
 
 
 # In[83]:
@@ -53,47 +36,57 @@ time_ask = df_ask.iloc[:, 0]
 
 #Convertion from series to array
 price_bid_array = price_bid.to_numpy()
-price_ask_array = price_ask.to_numpy()
-time_ask_array = time_ask.to_numpy()
+price_offer_array = price_offer.to_numpy()
+time_offer_array = time_offer.to_numpy()
 time_bid_array = time_bid.to_numpy()
 
 # In[111]:
 
-def merging (time_ask_array,time_bid_array):
+def merging (time_offer_array,time_bid_array):
     
-    a = len(time_ask_array)
+    o = len(time_offer_array)
     b = len(time_bid_array)
     
-    #ask = np.empty(shape=(a,3))
-    ask = []
+    #offer = np.empty(shape=(a,3))
+    offer = []
     #bid = np.empty(shape=(b,3))
     bid = []
     
-    for i in range(0,a):
-        #ask[i] = [time_ask_array[i],'a',i]
-        ask.append([time_ask_array[i],'a',i])
+    for i in range(0,o):
+        #offer[i] = [time_offer_array[i],'o',i]
+        offer.append([time_offer_array[i],'o',i,0])
 
     
     for j in range(0,b):
         #bid[j] = [time_bid_array[j],'b',b]
-        bid.append([time_bid_array[j],'b',j])
+        bid.append([time_bid_array[j],'b',j,0])
     
-    merging_array = bid + ask
+    merging_array = bid + offer
     res = sorted(merging_array, key = itemgetter(0))
+    
+    res_bis = [res[0]]
+    len_res = len(res)
+    
+    for i in range(1,len_res,1):
+        if res_bis[-1][0]==res[i][0]:
+            res_bis[-1][1]='bo'
+            res_bis[-1][3]=res[i][2]
+        else:
+            res_bis.append(res[i])
 
-    return res
-  
+    return res_bis
+
 # In[111]:
     
-Final = merging (time_ask_array,time_bid_array)
+Final = merging (time_offer_array,time_bid_array)
 
 # In[112]:
 # CSV file importation 
 
 # field name 
-fields = ['Time', 'Ask_Bid', 'Row']
+fields = ['Time', 'Offer_Bid', 'Row', 'Offer_Row']
 
-with open('MergedTime', 'w') as f:
+with open('MergedTimeBis', 'w') as f:
       
     # using csv.writer method from CSV package
     write = csv.writer(f)
