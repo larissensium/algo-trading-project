@@ -23,6 +23,7 @@ time_list = csv_merge_file.iloc[:, 0].tolist()
 bid_list = [0]
 offer_list = [0]
 spread_list = []
+t = [] # list of time for negative spread
 
 print('lists creation')
 # Import data 
@@ -51,6 +52,7 @@ for index,row in csv_merge_file.iterrows():
         spread_list.append(offer_list[-1] - bid_list[-1])
 
     if (spread_list[-1]<0):
+        t.append(csv_merge_file.loc[selected_row,:][0])
         print(f' row: {row}\n index: {index}\n time: {time_list[index]}\n Bid: {bid_list[-1]}\n Offer: {offer_list[-1]}\n\n')
 
 print ('lists created')
@@ -102,5 +104,18 @@ res = [n for n in spread_list if n > 0]
 
 # displaying all remaining values of the spread to check
 Counter(res)
+
+# debugging: check if time for negative spread increases 
+
+negative_spread = []
+#nspred_ind = []
+
+for n in spread_list:
+    if n < 0:
+        #print(n, end=" ")
+        #nspred_ind.append(spread_list.index(n)) # indicies of negative values ?
+        negative_spread.append(n)
+
+
 
 # Info : 4 minutes of running time
