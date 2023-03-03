@@ -68,4 +68,31 @@ plt.show()
 plt.hist(spread_list[1:],bins=np.linspace(-1, 10, num=100))
 plt.show()
 
+
+from collections import Counter
+Counter(spread_list) # counts of all values of the spread 
+
+# most common values of the spread:
+# 1.0: 438983 - # of occurances of 1 in spread list 
+# 2.0: 14990,
+# 0.5: 112188
+# 1.5: 139287
+
+
+spread_1 = spread_list.count(1)
+percent_1 = spread_1/len(spread_list) # 0.5709055771441651
+print('counts of spread = 1:', spread_1 ,'\npercentage of all spread values: ',percent_1,'\n')
+
+spread_2 = spread_list.count(2)
+percent_2 = spread_2/len(spread_list)
+print('counts of spread = 2:', spread_2 ,'\npercentage of all spread values: ',percent_2,'\n')
+
+# idk maybe 0.5 and 1.5 not needed 
+spread_05 = spread_list.count(0.5)
+percent_05 = spread_05/len(spread_list) # 0.14590258595127736
+print('counts of spread = 0.5:', spread_05 ,'\npercentage of all spread values: ',percent_05,'\n')
+
+spread_1_5 = spread_list.count(1.5)
+percent_1_5 = spread_1_5/len(spread_list) # 0.18114534076189584
+print('counts of spread = 1.5:', spread_1_5 ,'\npercentage of all spread values: ',percent_1_5,'\n')
 # Info : 4 minutes of running time
