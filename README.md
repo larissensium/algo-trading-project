@@ -1,11 +1,16 @@
 # algo-trading-project
 Testing the Model Explaining Concave Price Impact
 
-Next Step
+To do :
+
+* value / percentage of the 
+* make sure time incressing for debuging
 
 * Creat file with (time, [bide price, bid volume], [offer price, offer volume] )
-* value / percentage of the 
-* make sure time incressing for debuging 
+* exclude spread <0
+* focus on spread \in [1:2]
+
+Remarks: 
+
 * (agressive limits order)
-* exclude 0 & <0
-* mostly 1 or 2 
+
