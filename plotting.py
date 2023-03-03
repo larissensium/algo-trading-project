@@ -65,7 +65,7 @@ plt.legend()
 plt.show()
 
 ## histogram of the spread
-plt.hist(spread_list[1:],bins=np.linspace(-1, 10, num=100))
+plt.hist(spread_list[1:],bins=np.linspace(-1, 10, num=50))
 plt.show()
 
 
